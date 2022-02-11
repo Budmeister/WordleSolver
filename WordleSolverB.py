@@ -26,14 +26,23 @@ class SolverB:
             for letter in word:
                 f[let(letter)] += 1
         return f
-
     
     def offer(self, word, key):
-        return [
-            'g' if key[i] == word[i] else
-            'y' if word[i] in key else 'r'
-            for i in range(len(key))
-        ]
+        mod_key = list(key)
+        result = ['r'] * len(key)
+        for i in range(len(key)):
+            if key[i] == word[i]:
+                result[i] = 'g'
+                mod_key[i] = '*'
+        for i in range(len(key)):
+            try:
+                j = mod_key.index(word[i])
+                if word[i] in mod_key:
+                    result[i] = 'y'
+                    mod_key[j] = '*'
+            except ValueError:
+                pass
+        return result
     
     def offer_unknown_key(self, word):
         print(word)
