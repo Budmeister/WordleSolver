@@ -172,6 +172,6 @@ if __name__ == "__main__":
     print(endings[1], " words were guessed incorrectly.")
     print(endings[2], " words were never guessed.")
 
-    with open("wordle_output.txt", "w") as file:
+    with open("output/wordle_output_part2.txt", "w") as file:
         file.writelines([str(result) + "\n" for result in results])
 
