@@ -6,20 +6,10 @@ words = La + Ta
 print(words[:20])
 print(len(words))
 
-def let(letter):
-    return ord(letter) - ord('a')
-
 class SolverC:
 
     def __init__(self):
         self.first_word = 'roate'
-
-    def get_freqs(self, dictionary):
-        f = [0] * 26
-        for word in dictionary:
-            for letter in word:
-                f[let(letter)] += 1
-        return f
 
     
     def offer(self, word, key):
@@ -43,21 +33,6 @@ class SolverC:
     def offer_unknown_key(self, word):
         print(word)
         return list(input().strip())
-
-    def possible_given_result(self, word_to_check, word_checked, result):
-        for i, r in enumerate(result):
-            if self.greens[i] != '*' and self.greens[i] != word_to_check[i]:
-                return False
-            if r == 'r':
-                if word_checked[i] in word_to_check:
-                    return False
-            elif r == 'y':
-                if word_checked[i] == word_to_check[i]:
-                    return False
-            elif r == 'g':
-                if word_checked[i] != word_to_check[i]:
-                    return False
-        return True
 
     def solve(self, key='*****', verbose=True, key_known=True):
         self.verbose = verbose
