@@ -23,18 +23,20 @@ class SolverC:
 
     
     def offer(self, word, key):
-        key_minus_greens = []
-        result = ['*'] * len(key)
+        mod_key = list(key)
+        result = ['r'] * len(key)
         for i in range(len(key)):
             if key[i] == word[i]:
                 result[i] = 'g'
-            else:
-                key_minus_greens.append(key[i])
+                mod_key[i] = '*'
         for i in range(len(key)):
-            if word[i] in key_minus_greens:
-                result[i] = 'y'
-            elif result[i] == '*':
-                result[i] = 'r'
+            try:
+                j = mod_key.index(word[i])
+                if word[i] in mod_key:
+                    result[i] = 'y'
+                    mod_key[j] = '*'
+            except ValueError:
+                pass
         return result
         
     
