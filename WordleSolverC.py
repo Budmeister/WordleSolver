@@ -84,6 +84,7 @@ class SolverC:
         elif len(self.possible_words) == 0:
             if self.verbose:
                 print("No more possible words!")
+            return -1, '*****'
         
         
         scores = self.part_method(words, self.possible_words)
