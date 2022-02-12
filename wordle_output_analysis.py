@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 bbh_results = [0] * 8
 bbh_sum = 0
 bbh_count = 0
-with open("output/wordle_output_part1.txt", "r") as file:
+with open("output/wordle_output_part2.txt", "r") as file:
     for line in file.readlines():
         result = eval(line[:-1])
         bbh_results[result[0]] += 1
@@ -14,7 +14,7 @@ with open("output/wordle_output_part1.txt", "r") as file:
 b_results = [0] * 8
 b_sum = 0
 b_count = 0
-with open("output/wordle_output_bf.txt", "r") as file:
+with open("output/wordle_output_part3.txt", "r") as file:
     for line in file.readlines():
         result = eval(line[:-1])
         b_results[result[0]] += 1
