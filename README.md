@@ -22,4 +22,38 @@ The brute force method loops through every word in `Ta` and assigns it a score. 
 
 The partition method aims to be as close to "perfect" as possible. After a guess is submitted and a response is received, `La` is partitioned into sub-dictionaries. All the keys in each subdictionary would give the same response given a specific guess. Then, to process the real response, `La` is reduced to the partition which corresponds to the response. A guess is selected according to the expected average partition length. That is, for every guess in `Ta`, `La` is partitioned, and the length of the partitions is averaged with a weighted average, the weights being the probablility of each partition containing the real key--which is the same as the length of the partition. The full expression becomes 
 
-```score = sum([len(partition[key]) ** 2 for key in partition]) / total_words```. 
+```
+score = sum([len(partition[key]) ** 2 for key in partition]) / total_words
+```
+
+## How to Use
+
+The solvers are intended to be used on the Python command line. Import the respective file for the solver you want to use, and initialize an object of that solver.
+
+```
+from WordleSolverC import *
+c = SolverC()
+```
+
+Then use the `solve()` method. If you want to test the solver on a known key, pass it in under the argument, `key`. To test the solver on an unknown key, pass in the argument `key_known=False`.
+
+```
+c.solve(key_known=False)
+```
+
+The solver will give the first guess, and you give the response from Wordle. (green=g, yellow=y, grey=r) The printed tuple gives more information about the guess: guess number, guess score, guess, number of possible keys. If the keys have been narrowed to 10 or less, the list of keys will be printed rather than the number of keys.
+
+```
+(0, 0, 'roate', 2315)
+roate
+yryyr
+(1, 1.1428571428571428, 'palas', 14)
+palas
+ryyrr
+(2, -1, 'ultra', ['ultra'])
+Final guess
+(3, 1)
+```
+![image](https://user-images.githubusercontent.com/74798905/153735824-b5d26fdf-dcea-4b2d-8a59-2844cc371c62.png)
+
+
