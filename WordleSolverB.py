@@ -1,15 +1,10 @@
-import random
 
-from pyparsing import WordStart
 from WordleDictionaries import *
 import istarmap
 from multiprocessing import Pool
-import time, datetime
-import tqdm
 
 words = []
 
-# with open("sgb-words.txt", "r") as file:
 with open("LaTa.txt", "r") as file:
     words = [line[:-1] for line in file.readlines()]
 print(words[:20])
@@ -63,11 +58,10 @@ class SolverB:
                     return False
         return True
 
-    def solve(self, key, verbose=True, key_known=True):
+    def solve(self, key='*****', verbose=True, key_known=True):
         self.verbose = verbose
         self.freqs = self.get_freqs(words)
     
-        # self.possible_words = words.copy()
         self.possible_words = La.copy()
         self.knowledge = [['*'] * len(key) for _ in range(26)]
         self.yellows = []    # (letter, info)
@@ -191,9 +185,6 @@ class SolverB:
                 s += 0.5
             potential_guesses.append((s, word))
         
-        # potential_guesses.sort()
-
-        # return potential_guesses[-1]
         best_guesses = []
         for guess in potential_guesses:
             if len(best_guesses) < num_guesses or len(best_guesses) == 0 or guess[0] > best_guesses[0][0]:
@@ -206,7 +197,6 @@ class SolverB:
     def bf_eval_key(self, words_to_check, key, scores, e=-1):
         for i, word in enumerate(words_to_check):
             result = self.offer(word, key)
-            # new_possible = list(filter(lambda x: self.possible_given_result(x, word, result), self.possible_words))
             len_new_possible = 0
             for poss_word in self.possible_words:
                 if self.possible_given_result(poss_word, word, result):
@@ -233,25 +223,8 @@ class SolverB:
             self.bf_eval_key(words_to_check, key, scores)
         return scores
 
-    # def brute_force_multiprocess(self, words_to_check, verbose=False, num_processes=5):
-    #     scores = [[0, word] for word in words_to_check]
-    #     self.bfm_count = 0
-    #     # for e, key in enumerate(self.possible_words):
-    #     starttime = time.time()
-    #     def callback(e):
-    #         self.bfm_count += 1
-    #         percent = self.bfm_count / len(self.possible_words)
-    #         if percent != 0:
-    #             today = datetime.datetime.fromtimestamp(time.time() + (time.time() - starttime) / percent)
-    #             print('BF[key=' + self.possible_words[e] + ', {0:.{1}f}%'.format(100 * percent, 3) + f', {round((time.time() - starttime) / 60, 2)}m, ETA: {today.hour}:{today.minute}]')
-    #     with Pool(num_processes) as p:
-    #         counter = p.istarmap(self.bf_eval_key, [(words_to_check, key, scores, e if verbose else -1) for e, key in enumerate(self.possible_words)], 
-    #                 chunksize=300)
-    #         for _ in tqdm.tqdm(counter, total=len(self.possible_words)):
-    #             pass
-    #     return scores
-
     def brute_force_multiprocess(self, words_to_check, possible_keys=None, verbose=False, num_processes=5):
+        import tqdm
         if possible_keys is None:
             possible_keys = self.possible_words
         scores = []

@@ -1,9 +1,7 @@
-import random
 from WordleDictionaries import *
 
 words = []
 
-# with open("sgb-words.txt", "r") as file:
 with open("LaTa.txt", "r") as file:
     words = [line[:-1] for line in file.readlines()]
 print(words[:20])
@@ -57,13 +55,12 @@ class SolverA:
                     return False
         return True
 
-    def solve(self, key, verbose=True, key_known=True):
+    def solve(self, key='*****', verbose=True, key_known=True):
         if not key_known:
             self.offer = self.offer_unknown_key
         self.verbose = verbose
         self.freqs = self.get_freqs(words)
     
-        # self.possible_words = words.copy()
         self.possible_words = La.copy()
         self.knowledge = [['*'] * len(key) for _ in range(26)]
         self.yellows = []    # (letter, info)
@@ -175,9 +172,6 @@ class SolverA:
                 s += 0.5
             potential_guesses.append((s, word))
         
-        # potential_guesses.sort()
-
-        # return potential_guesses[-1]
         best_guess = potential_guesses[0]
         for guess in potential_guesses:
             if guess[0] > best_guess[0]:
@@ -194,7 +188,6 @@ if __name__ == "__main__":
     s = SolverA()
 
     num_words = 0
-    # for i, word in enumerate(words):
     for i, word in enumerate(La):
         num_tries, ending = s.solve(word, verbose=False)
         avg_tries += num_tries

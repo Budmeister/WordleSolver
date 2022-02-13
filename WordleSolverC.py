@@ -1,6 +1,5 @@
 
 from WordleDictionaries import *
-from tqdm import tqdm
 
 words = La + Ta
 print(words[:20])
@@ -119,6 +118,7 @@ class SolverC:
 
 
 if __name__ == "__main__":
+    from tqdm import tqdm
     endings = [0, 0, 0]
     avg_tries = 0
 
@@ -133,8 +133,6 @@ if __name__ == "__main__":
         endings[ending] += 1
         results.append((num_tries, ending, word))
         num_words += 1
-        # if i % 100 == 0:
-        #     print('{0:.{1}f}%'.format(i / len(La) * 100, 3))
 
     results.sort()
     avg_tries /= num_words
