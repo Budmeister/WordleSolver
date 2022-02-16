@@ -91,9 +91,7 @@ class SolverC:
         
         
         scores = self.part_method(words, self.possible_words)
-        # scores.sort()
         return min(scores)
-        # return max(scores)
 
     def partition(self, guess, keys):
         parts = {}
@@ -111,24 +109,11 @@ class SolverC:
     def avg_partition_len(self, partition, total_words):
         return sum([len(partition[key]) ** 2 for key in partition]) / total_words
 
-    def eval_partition_diversity(self, part, total_words):
-        freqs = [0] * 26
-        for word in part:
-            for letter in word:
-                freqs[let(letter)] += 1
-        return sqrt(sum([(freq / len(part)) ** 2 for freq in freqs])) / total_words
-
     def part_method(self, words_to_check, keys):
         scores = []
         for guess in words_to_check:
             parts = self.partition(guess, keys)
             score = self.avg_partition_len(parts, len(keys))
-            # score = 0
-            # for result in parts:
-            #     part = parts[result]
-            #     div = self.eval_partition_diversity(part, len(part))
-            #     score += div * len(part)
-            # score /= len(keys)
             scores.append((score, guess, parts))
         return scores
         
