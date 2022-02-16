@@ -1,9 +1,10 @@
 from WordleDictionaries import *
 
-words = []
+# with open("LaTa.txt", "r") as file:
+#     words = [line[:-1] for line in file.readlines()]
 
-with open("LaTa.txt", "r") as file:
-    words = [line[:-1] for line in file.readlines()]
+words = La + Ta
+
 print(words[:20])
 print(len(words))
 

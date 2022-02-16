@@ -145,7 +145,7 @@ if __name__ == "__main__":
     s = SolverC()
 
     num_words = 0
-    for i, word in tqdm(enumerate(La)):
+    for i, word in tqdm(enumerate(La), total=len(La)):
         num_tries, ending = s.solve(word, verbose=False)
         avg_tries += num_tries
         endings[ending] += 1

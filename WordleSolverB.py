@@ -3,10 +3,9 @@ from WordleDictionaries import *
 import istarmap
 from multiprocessing import Pool
 
-words = []
-
-with open("LaTa.txt", "r") as file:
-    words = [line[:-1] for line in file.readlines()]
+# with open("LaTa.txt", "r") as file:
+#     words = [line[:-1] for line in file.readlines()]
+words = La + Ta
 print(words[:20])
 print(len(words))
 
