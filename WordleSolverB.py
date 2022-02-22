@@ -20,6 +20,7 @@ class SolverB:
             for letter in word:
                 f[let(letter)] += 1
         return f
+
     
     def offer(self, word, key):
         mod_key = list(key)
@@ -31,7 +32,7 @@ class SolverB:
         for i in range(len(key)):
             try:
                 j = mod_key.index(word[i])
-                if mod_key[i] != '*':
+                if mod_key[j] != '*':
                     result[i] = 'y'
                     mod_key[j] = '*'
             except ValueError:
