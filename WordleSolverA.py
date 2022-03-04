@@ -31,7 +31,7 @@ class SolverA:
         for i in range(len(key)):
             try:
                 j = mod_key.index(word[i])
-                if mod_key[j] != '*':
+                if mod_key[j] != '*' and mod_key[i] != '*':
                     result[i] = 'y'
                     mod_key[j] = '*'
             except ValueError:
